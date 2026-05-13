@@ -12,7 +12,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {createStaticNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Login from "./login";
+import Login from "./Login";
 import Home from "./Home";
 import NewAccount from "./NewAccount";
 
