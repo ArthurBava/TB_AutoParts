@@ -9,10 +9,14 @@ import {
   Dimensions,
   StatusBar,
 } from "react-native";
+import {useNavigation} from '@react-navigation/native';
+
+
 
 const { width } = Dimensions.get("window");
 
-export default function App() {
+export default function Home   () {
+    const navigation = useNavigation();
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(40)).current;
   const logoScale = useRef(new Animated.Value(0.7)).current;
@@ -41,11 +45,11 @@ export default function App() {
   }, []);
 
   const handleLogin = () => {
-    console.log("Login");
+    navigation.navigate("Login")
   };
 
   const handleRegister = () => {
-    console.log("Criar conta");
+    navigation.navigate("NewAccount");
   };
 
   const handleForgotPassword = () => {
