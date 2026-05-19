@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,9 +10,8 @@ import {
   StatusBar,
 } from "react-native";
 import {useNavigation} from '@react-navigation/native';
-import { TextInput } from "react-native-gesture-handler";
 
-
+const { width } = Dimensions.get("window");
 
 export default function Login() {
     const navigation = useNavigation();
@@ -20,160 +19,136 @@ export default function Login() {
     const slideAnim = useRef(new Animated.Value(40)).current;
     const logoScale = useRef(new Animated.Value(0.7)).current;
 
-    //Guardar Login e senha 
-    const [Login, setLogin] = useState("");
-    const [Senha, setSenha] = useState("");
-
-
-
     useEffect(() => {
         Animated.parallel([
-            Animated.timing(fadeAnim,{
+            Animated.timing(fadeAnim, {
                 toValue: 1,
-                duraction: 900,
+                duration: 900,
+                userNativeDriver: true,
+            }),
+            
+            Animated.timing(slideAnim, {
+                toValue: 0,
+                duration: 700,
+                userNativeDriver: true,
+            }),
+
+            Animated.spring(logoScale, {
+                toValue: 1,
+                friction: 5,
+                tension: 80,
                 useNativeDriver: true,
-            })
-        ])
-
-        Animated.timing(slideAnim, {
-            toValue: 1,
-            duraction: 700,
-            useNativeDriver: true,
-        }).start();
-
-        Animated.spring(logoScale, {
-            toValue: 1,
-            friction: 5,
-            tension: 80,
-            useNativeDriver: true,
-        }).start();
+            }),
+        ]).start();
     }, []);
 
-    const handleLogin = ()  => {
-        console.log("Login:", login);
-        console.log("Senha:", senha);
-    };
-    return (
-        <View style={styles.container}>
-            /*Campo Login*/
-            <TextInput
-            style={styles.input}
-            placeholder="Digite seu E-mail"
-            value={Login}
-            onChangeText={setLogin} 
-            />
-            /*Campo Senha */
-            <TextInput
-            style={styles.input}
-            placeholder="Digite sua Senha"
-            value={Senha}
-            onChangeText={setSenha} 
-            />
 
-            {/*Botão*/}
-            <TouchableOpacity style={style.button} onPress={handleLogin}> 
-                <Text style={styles.buttonText}>
-                    Entrar
-                </Text>
+      const handleemail = () => {
+        navigation.navigate("Email")
+      };
+    
+    
+      const handleForgotPassword = () => {
+        console.log("Senha");
+      };
+
+      const handleesqueciaSenha = () => {
+        console.log("Esqueci a Senha")
+      };
+    
+      return (
+        <View style={styles.container}>
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor="#0d1b2e"
+          />
+    
+          {/* Background */}
+          <View style={styles.bgCircle1} />
+          <View style={styles.bgCircle2} />
+    
+          {/* Logo */}
+          <Animated.View
+            style={[
+              styles.logoContainer,
+              {
+                opacity: fadeAnim,
+                transform: [{ scale: logoScale }],
+              },
+            ]}
+          >
+            <Image
+              source={require("./assets/img_tb_facul.png")}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+          </Animated.View>
+    
+          {/* Textos */}
+          <Animated.View
+            style={[
+              styles.textContainer,
+              {
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }],
+              },
+            ]}
+          >
+            <Text style={styles.welcomeTitle}>
+              Bem-vindo a AutoParts!
+            </Text>
+    
+            <Text style={styles.welcomeSubtitle}>
+              Aqui você encontra tudo que{"\n"}
+              falta em seu veículo!
+            </Text>
+          </Animated.View>
+    
+          {/* Botões */}
+          <Animated.View
+            style={[
+              styles.buttonsContainer,
+              {
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }],
+              },
+            ]}
+          >
+            <TouchableOpacity
+              style={styles.emailButton}
+              onPress={handleemail}
+              activeOpacity={0.85}
+            >
+              <Text style={styles.emailButtonText}>
+                Email
+              </Text>
             </TouchableOpacity>
+    
+            <TouchableOpacity
+              style={styles.ForgotpasswordButton}
+              onPress={handleForgotPassword}
+              activeOpacity={0.85}
+            >
+              <Text style={styles.passworButtonText}>
+                Senha
+              </Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+            style={styles.esqueciaSenhaButton}
+            onPress={handleesqueciaSenha}
+            activeOpacity={0.85}>
+            
+            <Text style={styles.esqueciaSenhaButtonText}>
+              Esqueci a Senha!
+            </Text>
+            </TouchableOpacity>
+          </Animated.View>
         </View>
-    )
+      );
 
 
 }
-
-
-return (
-    <View style={styles.container}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="#0d1b2e"
-      />
-
-      {/* Background */}
-      <View style={styles.bgCircle1} />
-      <View style={styles.bgCircle2} />
-
-      {/* Logo */}
-      <Animated.View
-        style={[
-          styles.logoContainer,
-          {
-            opacity: fadeAnim,
-            transform: [{ scale: logoScale }],
-          },
-        ]}
-      >
-        <Image
-          source={require("./assets/img_tb_facul.png")}
-          style={styles.logo}
-          resizeMode="contain"
-        />
-      </Animated.View>
-
-      {/* Textos */}
-      <Animated.View
-        style={[
-          styles.textContainer,
-          {
-            opacity: fadeAnim,
-            transform: [{ translateY: slideAnim }],
-          },
-        ]}
-      >
-        <Text style={styles.welcomeTitle}>
-          Bem-vindo a AutoParts!
-        </Text>
-
-        <Text style={styles.welcomeSubtitle}>
-          Aqui você encontra tudo que{"\n"}
-          falta em seu veículo!
-        </Text>
-      </Animated.View>
-
-      {/* Botões */}
-      <Animated.View
-        style={[
-          styles.buttonsContainer,
-          {
-            opacity: fadeAnim,
-            transform: [{ translateY: slideAnim }],
-          },
-        ]}
-      >
-        <TouchableOpacity
-          style={styles.loginButton}
-          onPress={handleLogin}
-          activeOpacity={0.85}
-        >
-          <Text style={styles.loginButtonText}>
-            Login
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.createAccountButton}
-          onPress={handleRegister}
-          activeOpacity={0.85}
-        >
-          <Text style={styles.createAccountButtonText}>
-            Criar nova conta
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.forgotPasswordButton}
-          onPress={handleForgotPassword}
-          activeOpacity={0.85}
-        >
-          <Text style={styles.forgotPasswordButtonText}>
-            Esqueci a senha
-          </Text>
-        </TouchableOpacity>
-      </Animated.View>
-    </View>
-  );
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -251,7 +226,7 @@ const styles = StyleSheet.create({
     gap: 14,
   },
 
-  loginButton: {
+  emailButton: {
     width: "100%",
     backgroundColor: "#4a6080",
     borderRadius: 30,
@@ -261,7 +236,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: "#5a7090",
 
-    shadowColor: "#000",
+    shadowColor: "#000000",
     shadowOffset: {
       width: 0,
       height: 4,
@@ -271,14 +246,14 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 
-  loginButtonText: {
+  emailButtonText: {
     color: "#ffffff",
     fontSize: 16,
     fontWeight: "600",
     letterSpacing: 1,
   },
 
-  createAccountButton: {
+  ForgotpasswordButton: {
     width: "100%",
     backgroundColor: "transparent",
     borderRadius: 30,
@@ -289,26 +264,28 @@ const styles = StyleSheet.create({
     borderColor: "#4a6080",
   },
 
-  createAccountButtonText: {
-    color: "#a0b4c8",
+  passwordButtonText: {
+    color: "#ffffff",
     fontSize: 16,
     fontWeight: "500",
   },
 
-  forgotPasswordButton: {
+  esqueciaSenhaButton: {
     width: "100%",
     backgroundColor: "transparent",
     borderRadius: 30,
-    paddingVertical: 14,
+    paddingVertical: 16,
     alignItems: "center",
 
-    borderWidth: 1,
-    borderColor: "#2a3a50",
-    marginTop: 2,
+    
+    borderColor: "#4a6080",
   },
 
-  forgotPasswordButtonText: {
-    color: "#6a8aaa",
-    fontSize: 15,
-  },
+  esqueciaSenhaButtonText: {
+    color: "#0000FF",
+    fontSize: 20,
+    fontWeight: "200"
+  }
+
+
 });
