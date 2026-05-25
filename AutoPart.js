@@ -38,10 +38,11 @@ export default function AutoPart() {
           value={pesquisa}
           onChangeText={setPesquisa}
         />
-
-        <TouchableOpacity style={styles.iconButton}>
+     
+     {/*Botão do sininho*/}
+    {/*<TouchableOpacity style={styles.iconButton}>
           <Ionicons name="notifications-outline" size={24} color="#000" />
-        </TouchableOpacity>
+        </TouchableOpacity>*/}
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
