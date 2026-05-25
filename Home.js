@@ -52,9 +52,6 @@ export default function Home   () {
     navigation.navigate("NewAccount");
   };
 
-  const handleForgotPassword = () => {
-    console.log("Esqueci a senha");
-  };
 
   return (
     <View style={styles.container}>
@@ -133,16 +130,7 @@ export default function Home   () {
             Criar nova conta
           </Text>
         </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.forgotPasswordButton}
-          onPress={handleForgotPassword}
-          activeOpacity={0.85}
-        >
-          <Text style={styles.forgotPasswordButtonText}>
-            Esqueci a senha
-          </Text>
-        </TouchableOpacity>
+      
       </Animated.View>
     </View>
   );
@@ -269,20 +257,5 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 
-  forgotPasswordButton: {
-    width: "100%",
-    backgroundColor: "transparent",
-    borderRadius: 30,
-    paddingVertical: 14,
-    alignItems: "center",
 
-    borderWidth: 1,
-    borderColor: "#2a3a50",
-    marginTop: 2,
-  },
-
-  forgotPasswordButtonText: {
-    color: "#6a8aaa",
-    fontSize: 15,
-  },
 });
