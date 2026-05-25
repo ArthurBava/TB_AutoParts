@@ -63,13 +63,11 @@ export default function Login() {
         navigation.navigate("EsqueciSenha");
       };
       const handleLogin = () => {
-        console.log("Email:", email);
-        console.log("Senha:", senha);
+        console.log("clicou");
+
+        navigation.navigate("AutoPart");
       };
-      const handleLogin = () => {
-        navigation.navigate("Home");
-      };
-    
+
       return (
         <View style={styles.container}>
           <StatusBar
@@ -109,11 +107,11 @@ export default function Login() {
             ]}
           >
             <Text style={styles.welcomeTitle}>
-              Bem-vindo a AutoParts!
+              Bem-vindo à AutoParts!
             </Text>
     
             <Text style={styles.welcomeSubtitle}>
-              Aqui você encontra tudo que{"\n"}
+              Aqui você encontra tudo o que{"\n"}
               falta em seu veículo!
             </Text>
           </Animated.View>
@@ -128,14 +126,8 @@ export default function Login() {
               },
             ]}
           >
-            <TouchableOpacity
-              style={styles.emailButton}
-              onPress={handleLogin}
-            >
-            <Text style={styles.emailButtonText}>
-              Entrar
-            </Text>
-            </TouchableOpacity>
+
+
     
             <TextInput
               style={styles.input}

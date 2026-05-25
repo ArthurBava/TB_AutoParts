@@ -28,12 +28,27 @@ const RootStack = createNativeStackNavigator({
     },
     Login: {
       screen: Login,
+            options: {
+        headerShown: false
+      }
     },
     NewAccount: {
-      screen: NewAccount, 
+      screen: NewAccount,
+            options: {
+        headerShown: false
+      } 
     },
     EsqueciSenha: {
       screen: EsqueciSenha,
+            options: {
+        headerShown: false
+      }
+    },
+    AutoPart: {
+      screen: AutoPart,
+            options: {
+        headerShown: false
+      }
     }
   },
 });

@@ -95,11 +95,11 @@ export default function Home   () {
         ]}
       >
         <Text style={styles.welcomeTitle}>
-          Bem-vindo a AutoParts!
+          Bem-vindo à AutoParts!
         </Text>
 
         <Text style={styles.welcomeSubtitle}>
-          Aqui você encontra tudo que{"\n"}
+          Aqui você encontra tudo o que{"\n"}
           falta em seu veículo!
         </Text>
       </Animated.View>
