@@ -19,13 +19,17 @@ export default function AutoPart() {
   const [pesquisa, setPesquisa] = useState("");
   const navigation = useNavigation();
   const produtos = [
-  {
-    id: 1,
-    nome: "Produto 1",
-    descricao: "Descrição",
-    preco: "R$ 100,00",
-  },
-];
+    {
+      id: 1,
+      nome: "Kit Amortecedor",
+      descricao: "Kit completo de amortecedores",
+      descricaoCompleta:
+        "Kit completo de amortecedores para veículos nacionais e importados.",
+      preco: "R$ 1.120,90",
+      imagem: require("./assets/kitamort.webp"),
+    },
+  ];
+
  
 
   return (
@@ -94,16 +98,7 @@ export default function AutoPart() {
           </Text>
         </View>
       </TouchableOpacity>
-))}
-      <TouchableOpacity
-        key={item.id}
-        style={styles.productCard}
-        onPress={() =>
-        navigation.navigate("ProdutoDetalhe", {
-          produto: item,
-        })
-        }
-      > </TouchableOpacity>;
+))} 
         <View style={{ height: 100 }} />
       </ScrollView>
 
