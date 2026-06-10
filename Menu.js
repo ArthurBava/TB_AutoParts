@@ -21,39 +21,40 @@ export default function Menu() {
   const integrantes = [
   {
     nome: "Arthur Bavaresco Spada",
-    funcao: "Desenvolvimento Front-End e React Native",
+    funcao: " RA-1136264 \n Desenvolvimento Front-End e React Native ",
     imagem: require("./assets/arthur.jpeg"),
   },
   {
-    nome: "Mariana M.  Melara",
-    funcao: "Função do integrante 2",
+    nome: "Mariana Mezzavila Melara",
+    funcao: " RA-1136271 \n Desenvolvedora Backend.  ",
     imagem: require("./assets/mariana.jpeg"),
     
   },
   {
-    nome: "Maria",
-    funcao: "Função do integrante 3",
+    nome: "Maria Eduarda Schulze",
+    funcao: " RA-1136125 \n Lider do Grupo/Designer de UX/UI.",
     imagem: require("./assets/maria.jpeg"),
     
   },
   {
-    nome: "Guilherme",
-    funcao: "Função do integrante 4",
+    nome: "Guilherme Tadeu Castellani",
+    funcao: " RA-1136257 \n Desenvolvedor Backend.",
     imagem: require("./assets/guilherme.jpeg"),
   },
   {
-    nome: "Emanoel",
-    funcao: "Função do integrante 5",
+    nome: "Emanoel Rosa",
+    funcao: " RA- 1136489 \n Gestor de Projetos  ",
     imagem: require("./assets/emanoel.jpeg"),
   },
   {
-    nome: "Izadora",
-    funcao: "Função do integrante 6",
+    nome: "Isadora Aguirre Dal Conte",
+    funcao: " RA-1136123 \n Desenvolvimento Front-End",
+    imagem: require("./assets/izadora.jpeg"),
     
   },
   {
-    nome: "Nome 7",
-    funcao: "Função do integrante 7",
+    nome: " Rafaela Bilibio da Silva ",
+    funcao: " RA- 1137885 \n Atribuição: \n Engenheiro de Qualidade/Designer de UX/UI ",
     
   },
   

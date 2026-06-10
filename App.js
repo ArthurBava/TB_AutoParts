@@ -18,6 +18,7 @@ import NewAccount from "./NewAccount";
 import EsqueciSenha from "./EsqueciSenha";
 import AutoPart from "./AutoPart";
 import Menu from "./Menu";
+import ProdutoDetalhe from "./ProdutoDetalhe";
 
 const RootStack = createNativeStackNavigator({
   screens: {
@@ -54,6 +55,12 @@ const RootStack = createNativeStackNavigator({
     Menu: {
       screen: Menu,
             options: {
+        headerShown: false
+      }
+    },
+    ProdutoDetalhe: {
+      screen: ProdutoDetalhe,
+          options: {
         headerShown: false
       }
     }

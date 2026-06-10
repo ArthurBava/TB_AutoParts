@@ -18,7 +18,15 @@ import { useNavigation } from "@react-navigation/native";
 export default function AutoPart() {
   const [pesquisa, setPesquisa] = useState("");
   const navigation = useNavigation();
-
+  const produtos = [
+  {
+    id: 1,
+    nome: "Produto 1",
+    descricao: "Descrição",
+    preco: "R$ 100,00",
+  },
+];
+ 
 
   return (
     <View style={styles.container}>
@@ -58,28 +66,44 @@ export default function AutoPart() {
         </View>
 
         {/* Produtos */}
-        {[1, 2, 3, 4, 5].map((item) => (
-          <TouchableOpacity key={item} style={styles.productCard}>
-            <View style={styles.productImage}>
-              <Text>Imagem</Text>
-            </View>
+        {produtos.map((item) => (
+      <TouchableOpacity
+          key={item.id}
+          style={styles.productCard}
+          onPress={() =>
+          navigation.navigate("ProdutoDetalhe", {
+            produto: item,
+        })
+        }
+        >
+        <View style={styles.productImage}>
+          <Text>Imagem</Text>
+        </View>
 
-            <View style={styles.productInfo}>
-              <Text style={styles.productTitle}>
-                Descrição do Produto
-              </Text>
+        <View style={styles.productInfo}>
+          <Text style={styles.productTitle}>
+            {item.nome}
+          </Text>
 
-              <Text style={styles.productDescription}>
-                Detalhes do produto...
-              </Text>
+          <Text style={styles.productDescription}>
+            {item.descricao}
+          </Text>
 
-              <Text style={styles.productPrice}>
-                R$ 0,00
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-
+          <Text style={styles.productPrice}>
+            {item.preco}
+          </Text>
+        </View>
+      </TouchableOpacity>
+))}
+      <TouchableOpacity
+        key={item.id}
+        style={styles.productCard}
+        onPress={() =>
+        navigation.navigate("ProdutoDetalhe", {
+          produto: item,
+        })
+        }
+      > </TouchableOpacity>;
         <View style={{ height: 100 }} />
       </ScrollView>
 
