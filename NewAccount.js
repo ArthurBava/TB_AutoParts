@@ -22,9 +22,12 @@ export default function Login() {
     const slideAnim = useRef(new Animated.Value(40)).current;
     const logoScale = useRef(new Animated.Value(0.7)).current;
     const [email, setEmail] = useState("");
+    const [cpf, setCpf] = useState("");
     const [senha, setSenha] = useState("");
     const [mostrarSenha, setMostrarSenha] = useState(false);
     const [confsenha, setconfSenha] = useState("");
+    const [erroSenha, setErroSenha] = useState("");
+    
 
     useEffect(() => {
     Animated.parallel([
@@ -61,16 +64,28 @@ export default function Login() {
       const handleForgotConfPassword = () => {
         console.log("ConfirmarSenha");
       };
-      const handleesqueciaSenha = () => {
+      {/*const handleesqueciaSenha = () => {
         navigation.navigate("EsqueciSenha");
-      };
+      };*/}
       const handleLogin = () => {
-        console.log("clicou");
+          if (!cpf.trim()) {
+            alert("Digite o CPF");
+          return;
+          }
+        if (senha !== confsenha) {
+        setErroSenha("As senhas não são iguais!");
+        return;
+        }
 
+      setErroSenha("");
+
+        console.log("Cadastro realizado");
         navigation.navigate("AutoPart");
       };
+      
+   
 
-      return (
+    return (
         <View style={styles.container}>
           <StatusBar
             barStyle="light-content"
@@ -128,7 +143,11 @@ export default function Login() {
               },
             ]}
           >
-
+          {erroSenha ? (
+            <Text style={styles.erroText}>
+            {erroSenha}
+            </Text>
+          ) : null}
 
     
             <TextInput
@@ -140,11 +159,20 @@ export default function Login() {
               keyboardType="email-address"
              autoCapitalize="none"
             />
+            <TextInput
+              style={styles.input}
+              placeholder="Digite seu CPF"
+              placeholderTextColor="#a0b4c8"
+              value={cpf}
+              onChangeText={setCpf}
+              keyboardType="numeric"
+              maxLength={14}
+            />
 
             <View style={styles.passwordContainer}>
             <TextInput
               style={styles.passwordInput}
-              placeholder="Digite sua senha"
+              placeholder="Crie uma senha"
               placeholderTextColor="#a0b4c8"
               value={senha}
               onChangeText={setSenha}
@@ -161,15 +189,16 @@ export default function Login() {
               />
             </TouchableOpacity>
             </View>
-                        <View style={styles.confpasswordContainer}>
+            <View style={styles.confpasswordContainer}>
             <TextInput
               style={styles.confpasswordInput}
               placeholder="Confirme sua senha"
               placeholderTextColor="#a0b4c8"
               value={confsenha}
-              onChangeText={setSenha}
+              onChangeText={setconfSenha}
               secureTextEntry={!mostrarSenha}
             />
+
 
             <TouchableOpacity
               onPress={() => setMostrarSenha(!mostrarSenha)}
@@ -188,25 +217,18 @@ export default function Login() {
               activeOpacity={0.85}
             >
             <Text style={styles.emailButtonText}>
-              Entrar
+              Criar Conta
             </Text>
             </TouchableOpacity>
+
             
-            <TouchableOpacity
-            style={styles.esqueciaSenhaButton}
-            onPress={handleesqueciaSenha}
-            activeOpacity={0.85}>
-            
-            <Text style={styles.esqueciaSenhaButtonText}>
-              Esqueci a Senha!
-            </Text>
-            </TouchableOpacity>
           </Animated.View>
         </View>
       );
+    };
+    
 
-
-}
+    
 const styles = StyleSheet.create({
   input: {
   width: "100%",
@@ -346,23 +368,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 
-  esqueciaSenhaButton: {
-    width: "100%",
-    backgroundColor: "transparent",
-    borderRadius: 30,
-    paddingVertical: 16,
-    alignItems: "center",
-
-    
-    borderColor: "#4a6080",
-  },
-
-  esqueciaSenhaButtonText: {
-    color: "#0000FF",
-    fontSize: 20,
-    fontWeight: "200"
-  },
-  
   passwordContainer: {
   width: "100%",
   backgroundColor: "#112240",
@@ -397,6 +402,20 @@ confpasswordInput: {
   color: "#fff",
   fontSize: 16,
   paddingVertical: 15,
+},
+erroText: {
+  color: "#ff4d4d",
+  backgroundColor: "rgba(255,77,77,0.15)",
+  borderWidth: 1,
+  borderColor: "#ff4d4d",
+  borderRadius: 10,
+  paddingVertical: 10,
+  paddingHorizontal: 15,
+  width: "100%",
+  textAlign: "center",
+  fontSize: 15,
+  fontWeight: "bold",
+  marginBottom: 10,
 },
 
 

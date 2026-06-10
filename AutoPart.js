@@ -12,10 +12,13 @@ import {
   ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 
 export default function AutoPart() {
   const [pesquisa, setPesquisa] = useState("");
+  const navigation = useNavigation();
+
 
   return (
     <View style={styles.container}>
@@ -99,7 +102,7 @@ export default function AutoPart() {
           <Ionicons name="chatbox-outline" size={28} color="black" />
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
           <Ionicons name="menu" size={28} color="black" />
         </TouchableOpacity>
 
