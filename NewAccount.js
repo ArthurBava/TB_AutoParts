@@ -9,219 +9,395 @@ import {
   Dimensions,
   StatusBar,
   TextInput,
-  ScrollView,
 } from "react-native";
+import {useNavigation} from '@react-navigation/native';
 import { Ionicons } from "@expo/vector-icons";
+import EsqueciSenha from "./EsqueciSenha";
+
+const { width } = Dimensions.get("window");
+
+export default function Login() {
+    const navigation = useNavigation();
+    const fadeAnim = useRef(new Animated.Value(0)).current;
+    const slideAnim = useRef(new Animated.Value(40)).current;
+    const logoScale = useRef(new Animated.Value(0.7)).current;
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    const [mostrarSenha, setMostrarSenha] = useState(false);
+    const [confsenha, setconfSenha] = useState("");
+
+    useEffect(() => {
+    Animated.parallel([
+    Animated.timing(fadeAnim, {
+    toValue: 1,
+    duration: 900,
+    useNativeDriver: false,
+    }),
+
+    Animated.timing(slideAnim, {
+    toValue: 0,
+    duration: 700,
+    useNativeDriver: false,
+    }),
+
+    Animated.spring(logoScale, {
+    toValue: 1,
+    friction: 5,
+    tension: 80,
+    useNativeDriver: false,
+    }),
+    ]).start();
+    }, []);
 
 
-export default function AutoPart() {
-  const [pesquisa, setPesquisa] = useState("");
+      const handleemail = () => {
+        navigation.navigate("Email")
+      };
+    
+    
+      const handleForgotPassword = () => {
+        console.log("Senha");
+      };
+      const handleForgotConfPassword = () => {
+        console.log("ConfirmarSenha");
+      };
+      const handleesqueciaSenha = () => {
+        navigation.navigate("EsqueciSenha");
+      };
+      const handleLogin = () => {
+        console.log("clicou");
 
-  return (
-    <View style={styles.container}>
+        navigation.navigate("AutoPart");
+      };
+
+      return (
+        <View style={styles.container}>
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor="#0d1b2e"
+          />
+    
+          {/* Background */}
+          <View style={styles.bgCircle1} />
+          <View style={styles.bgCircle2} />
+    
+          {/* Logo */}
+          <Animated.View
+            style={[
+              styles.logoContainer,
+              {
+                opacity: fadeAnim,
+                transform: [{ scale: logoScale }],
+              },
+            ]}
+          >
+            <Image
+              source={require("./assets/img_tb_facul.png")}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+          </Animated.View>
+    
+          {/* Textos */}
+          <Animated.View
+            style={[
+              styles.textContainer,
+              {
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }],
+              },
+            ]}
+          >
+            <Text style={styles.welcomeTitle}>
+              Bem-vindo à AutoParts!
+            </Text>
+    
+            <Text style={styles.welcomeSubtitle}>
+              Faça aqui o seu cadastro{"\n"}
+              
+            </Text>
+          </Animated.View>
+    
+          {/* Botões */}
+          <Animated.View
+            style={[
+              styles.buttonsContainer,
+              {
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }],
+              },
+            ]}
+          >
 
 
-      {/* Cabeçalho */}
-      <View style={styles.header}>
-        <Image
-          source={require("./assets/img_tb_facul.png")}
-          style={styles.logo}
-        />
+    
+            <TextInput
+              style={styles.input}
+              placeholder="Digite seu e-mail"
+              placeholderTextColor="#a0b4c8"
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+             autoCapitalize="none"
+            />
 
-        <TouchableOpacity style={styles.iconButton}>
-          <Ionicons name="person-outline" size={24} color="#000" />
-        </TouchableOpacity>
+            <View style={styles.passwordContainer}>
+            <TextInput
+              style={styles.passwordInput}
+              placeholder="Digite sua senha"
+              placeholderTextColor="#a0b4c8"
+              value={senha}
+              onChangeText={setSenha}
+              secureTextEntry={!mostrarSenha}
+            />
 
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Buscar"
-          value={pesquisa}
-          onChangeText={setPesquisa}
-        />
-     
-     {/*Botão do sininho*/}
-    {/*<TouchableOpacity style={styles.iconButton}>
-          <Ionicons name="notifications-outline" size={24} color="#000" />
-        </TouchableOpacity>*/}
-      </View>
+            <TouchableOpacity
+              onPress={() => setMostrarSenha(!mostrarSenha)}
+            >
+            <Ionicons
+              name={mostrarSenha ? "eye-off" : "eye"}
+              size={24}
+              color="#a0b4c8"
+              />
+            </TouchableOpacity>
+            </View>
+                        <View style={styles.confpasswordContainer}>
+            <TextInput
+              style={styles.confpasswordInput}
+              placeholder="Confirme sua senha"
+              placeholderTextColor="#a0b4c8"
+              value={confsenha}
+              onChangeText={setSenha}
+              secureTextEntry={!mostrarSenha}
+            />
 
-      <ScrollView showsVerticalScrollIndicator={false}>
+            <TouchableOpacity
+              onPress={() => setMostrarSenha(!mostrarSenha)}
+            >
+            <Ionicons
+              name={mostrarSenha ? "eye-off" : "eye"}
+              size={24}
+              color="#a0b4c8"
+              />
+            </TouchableOpacity>
+            </View>
 
-        {/* Banner */}
-        <View style={styles.banner}>
-          <Text style={styles.bannerText}>
-            Área de promoções, avisos e novidades
-          </Text>
+            <TouchableOpacity
+              style={styles.emailButton}
+              onPress={handleLogin}
+              activeOpacity={0.85}
+            >
+            <Text style={styles.emailButtonText}>
+              Entrar
+            </Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+            style={styles.esqueciaSenhaButton}
+            onPress={handleesqueciaSenha}
+            activeOpacity={0.85}>
+            
+            <Text style={styles.esqueciaSenhaButtonText}>
+              Esqueci a Senha!
+            </Text>
+            </TouchableOpacity>
+          </Animated.View>
         </View>
+      );
 
-        {/* Produtos */}
-        {[1, 2, 3, 4, 5].map((item) => (
-          <TouchableOpacity key={item} style={styles.productCard}>
-            <View style={styles.productImage}>
-              <Text>Imagem</Text>
-            </View>
 
-            <View style={styles.productInfo}>
-              <Text style={styles.productTitle}>
-                Descrição do Produto
-              </Text>
-
-              <Text style={styles.productDescription}>
-                Detalhes do produto...
-              </Text>
-
-              <Text style={styles.productPrice}>
-                R$ 0,00
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-
-        <View style={{ height: 100 }} />
-      </ScrollView>
-
-      {/* Menu inferior */}
-      <View style={styles.bottomBar}>
-
-        <TouchableOpacity>
-          <Ionicons name="home" size={28} color="black" />
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <Ionicons name="star" size={28} color="black" />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.cartButton}>
-          <Ionicons name="cart" size={30} color="black" />
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <Ionicons name="chatbox-outline" size={28} color="black" />
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <Ionicons name="menu" size={28} color="black" />
-        </TouchableOpacity>
-
-      </View>
-
-    </View>
-  );
 }
-
 const styles = StyleSheet.create({
+  input: {
+  width: "100%",
+  backgroundColor: "#112240",
+  borderWidth: 1.5,
+  borderColor: "#4a6080",
+  borderRadius: 30,
+  paddingHorizontal: 20,
+  paddingVertical: 15,
+  color: "#fff",
+  fontSize: 16,
+  },
+
   container: {
     flex: 1,
     backgroundColor: "#0d1b2e",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 32,
+    overflow: "hidden",
   },
 
-  header: {
-    flexDirection: "row",
+  bgCircle1: {
+    position: "absolute",
+    width: width * 1.2,
+    height: width * 1.2,
+    borderRadius: width * 0.6,
+    backgroundColor: "#112240",
+    top: -width * 0.5,
+    left: -width * 0.1,
+    opacity: 0.6,
+  },
+
+  bgCircle2: {
+    position: "absolute",
+    width: width * 0.8,
+    height: width * 0.8,
+    borderRadius: width * 0.4,
+    backgroundColor: "#0a1628",
+    bottom: -width * 0.3,
+    right: -width * 0.2,
+    opacity: 0.8,
+  },
+
+  logoContainer: {
+    marginBottom: 32,
     alignItems: "center",
-    paddingHorizontal: 15,
-    paddingTop: 50,
-    paddingBottom: 15,
-    gap: 10,
+
+    shadowColor: "#e87722",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.35,
+    shadowRadius: 30,
+    elevation: 12,
   },
 
   logo: {
-    width: 40,
-    height: 40,
+    width: 220,
+    height: 220,
   },
 
-  iconButton: {
-    width: 40,
-    height: 40,
-    backgroundColor: "#d9d9d9",
-    borderRadius: 10,
-    justifyContent: "center",
+  textContainer: {
     alignItems: "center",
+    marginBottom: 36,
   },
 
-  searchInput: {
-    flex: 1,
-    backgroundColor: "#d9d9d9",
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    height: 40,
-    fontSize: 18,
-  },
-
-  banner: {
-    backgroundColor: "#8b8b8b",
-    marginHorizontal: 20,
-    borderRadius: 15,
-    height: 140,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 25,
-  },
-
-  bannerText: {
+  welcomeTitle: {
+    color: "#ffffff",
+    fontSize: 24,
+    fontWeight: "700",
     textAlign: "center",
-    paddingHorizontal: 20,
+    marginBottom: 8,
   },
 
-  productCard: {
-    flexDirection: "row",
-    backgroundColor: "#1a2a3a",
-    marginHorizontal: 18,
-    marginBottom: 15,
-    borderRadius: 20,
-    padding: 12,
+  welcomeSubtitle: {
+    color: "#a0b4c8",
+    fontSize: 15,
+    textAlign: "center",
+    lineHeight: 22,
   },
 
-  productImage: {
-    width: 110,
-    height: 110,
-    backgroundColor: "#8b8b8b",
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  productInfo: {
-    flex: 1,
-    marginLeft: 15,
-    justifyContent: "space-between",
-  },
-
-  productTitle: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "600",
-  },
-
-  productDescription: {
-    color: "#ccc",
-    fontSize: 14,
-  },
-
-  productPrice: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-
-  bottomBar: {
-    position: "absolute",
-    bottom: 0,
+  buttonsContainer: {
     width: "100%",
-    height: 70,
-    backgroundColor: "#d9d9d9",
-    flexDirection: "row",
-    justifyContent: "space-around",
     alignItems: "center",
+    gap: 14,
   },
 
-  cartButton: {
-    marginTop: -25,
-    width: 60,
-    height: 60,
+  emailButton: {
+    width: "100%",
+    backgroundColor: "#4a6080",
     borderRadius: 30,
-    backgroundColor: "#fff",
-    justifyContent: "center",
+    paddingVertical: 16,
     alignItems: "center",
+
+    borderWidth: 1.5,
+    borderColor: "#5a7090",
+
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
     elevation: 5,
   },
+
+  emailButtonText: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "600",
+    letterSpacing: 1,
+  },
+
+  ForgotpasswordButton: {
+    width: "100%",
+    backgroundColor: "transparent",
+    borderRadius: 30,
+    paddingVertical: 16,
+    alignItems: "center",
+
+    borderWidth: 1.5,
+    borderColor: "#4a6080",
+  },
+
+  passwordButtonText: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  
+  confpasswordButtonText: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "500",
+  },
+
+  esqueciaSenhaButton: {
+    width: "100%",
+    backgroundColor: "transparent",
+    borderRadius: 30,
+    paddingVertical: 16,
+    alignItems: "center",
+
+    
+    borderColor: "#4a6080",
+  },
+
+  esqueciaSenhaButtonText: {
+    color: "#0000FF",
+    fontSize: 20,
+    fontWeight: "200"
+  },
+  
+  passwordContainer: {
+  width: "100%",
+  backgroundColor: "#112240",
+  borderWidth: 1.5,
+  borderColor: "#4a6080",
+  borderRadius: 30,
+  flexDirection: "row",
+  alignItems: "center",
+  paddingHorizontal: 20,
+},
+
+passwordInput: {
+  flex: 1,
+  color: "#fff",
+  fontSize: 16,
+  paddingVertical: 15,
+},
+
+confpasswordContainer: {
+  width: "100%",
+  backgroundColor: "#112240",
+  borderWidth: 1.5,
+  borderColor: "#4a6080",
+  borderRadius: 30,
+  flexDirection: "row",
+  alignItems: "center",
+  paddingHorizontal: 20,
+},
+
+confpasswordInput: {
+  flex: 1,
+  color: "#fff",
+  fontSize: 16,
+  paddingVertical: 15,
+},
+
+
 });

@@ -111,8 +111,8 @@ export default function Login() {
             </Text>
     
             <Text style={styles.welcomeSubtitle}>
-              Aqui você encontra tudo o que{"\n"}
-              falta em seu veículo!
+              Faça aqui o seu login{"\n"}
+              
             </Text>
           </Animated.View>
     
