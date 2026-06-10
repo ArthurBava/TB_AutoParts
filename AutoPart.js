@@ -80,9 +80,10 @@ export default function AutoPart() {
         })
         }
         >
-        <View style={styles.productImage}>
-          <Text>Imagem</Text>
-        </View>
+        <Image
+          source={item.imagem}
+          style={styles.productImage}
+        />
 
         <View style={styles.productInfo}>
           <Text style={styles.productTitle}>
@@ -196,10 +197,8 @@ const styles = StyleSheet.create({
   productImage: {
     width: 110,
     height: 110,
-    backgroundColor: "#8b8b8b",
     borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
+    resizeMode: "contain",
   },
 
   productInfo: {
