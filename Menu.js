@@ -27,7 +27,7 @@ export default function Menu() {
   {
     nome: "Mariana Mezzavila Melara",
     funcao: " RA-1136271 \n Desenvolvedora Backend.  ",
-    imagem: require("./assets/mariana.jpeg"),
+   
     
   },
   {
