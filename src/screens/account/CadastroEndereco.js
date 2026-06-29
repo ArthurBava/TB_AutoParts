@@ -79,7 +79,7 @@ export default function CadastroEndereco() {
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      behavior="padding"
     >
       <StatusBar barStyle="light-content" backgroundColor={colors.bg} />
       <ScreenHeader title={editando ? "Editar endereço" : "Novo endereço"} />

@@ -9,6 +9,7 @@ import {
   StatusBar,
   TextInput,
   ActivityIndicator,
+  KeyboardAvoidingView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -142,7 +143,7 @@ export default function ProdutoDetalhe({ route }) {
   ];
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
       <StatusBar barStyle="light-content" backgroundColor={colors.bg} />
 
       <View style={styles.topBar}>
@@ -159,7 +160,11 @@ export default function ProdutoDetalhe({ route }) {
         </TouchableOpacity>
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 140 }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 140 }}
+      >
         <View style={styles.imageWrap}>
           {produto.imagem ? (
             <Image source={imgSource(produto.imagem)} style={[styles.imagem, { aspectRatio: imgRatio }]} resizeMode="cover" />
@@ -305,7 +310,7 @@ export default function ProdutoDetalhe({ route }) {
           }}
         />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

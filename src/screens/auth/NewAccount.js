@@ -61,7 +61,7 @@ export default function NewAccount() {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1, backgroundColor: colors.bg }}
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      behavior="padding"
     >
       <StatusBar barStyle="light-content" backgroundColor={colors.bg} />
       <View style={styles.glow} />
